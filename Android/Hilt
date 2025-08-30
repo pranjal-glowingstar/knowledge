@@ -1,0 +1,32 @@
+
+-> A wrapper over dagger this is used to provide dependency injection for our modules.
+-> It is better from dagger because it uses annotations directly instead of making extra boiler plate code and provides smooth DI support.
+-> It is part of Android Jetpack library and is official method for DI.
+
+-> Each lifecycle aware scope(Activity/Fragment/Service/ViewModel) is annotated with @AndroidEntryPoint/@HiltViewModel.
+-> These annotations tells hilt that this is the class where we need some dependency injection
+
+-> The Application class should be present in the app in order to use hilt and should be marked with @HiltAndroidApp
+-> This annotation tells hilt that this is the entry point for our application to create a dependency graph.
+
+-> Hilt has multiple components Like FragmentComponent, ActivityComponent, ActivityRetainedComponent, ServiceComponent and SingletonComponent
+-> These components define the scope of the object that will be provided by the hilt framework.
+
+-> In order to provide these object creations(dependencies), you can create a class and mark it with @Module and @InstallIn
+-> @Module will tell hilt that this is the point where we are making these dependencies and @InstallIn will tell the scope for these dependencies.
+
+-> Hilt has custom scopes like @ActivityScopes(Singleton wrt the hosting activity), @ActivityRetainedScope(singleton wrt the viewmodel) etc.
+-> These annotations defines the scope of the object and tells whether it should be singleton or not in nature.
+
+-> In order to inject dependencies to the classes that are not part of hilt(dependency available in the DI graph but no entry point annotation to tell hilt that we need DI here) we use @EntryPoint annotation.
+-> @EntryPoint annotation along with @InstallIn(for defining scope) is used to tell hilt that there is a Interface present that has some dependencies which are part of the graph and can be used.
+-> We use EntryPointAccessors class and provide this interface annotated with @EntryPoint as param to let hilt know that the implementation of this interface is to be provided by hilt and dependencies can be taken out from the graph which is already built.
+
+-> We use @Provides annotation if there is a dependency that requires some more dependencies for its object creation.
+-> The method can be annotated with @Provides annotation and will tell hilt that this is the method which is creating the instance of the object by seeing the return type of the method.
+
+-> We use @Binds annotation when we want to provide a specific implementation of any interface.
+-> Using @Binds tells hilt that whenever a specific interface A is required, we will be giving the object of class which is implementing this interface.
+-> If multiple classes are implementing the interface, then whatever the return type of this method will be, hilt will provide the instance of that implementation.
+
+//Will add more here.
