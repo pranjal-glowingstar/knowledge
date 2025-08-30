@@ -29,4 +29,10 @@
 -> Using @Binds tells hilt that whenever a specific interface A is required, we will be giving the object of class which is implementing this interface.
 -> If multiple classes are implementing the interface, then whatever the return type of this method will be, hilt will provide the instance of that implementation.
 
-//Will add more here.
+-> If there is a case where you need to add a dependency to a class which is available during runtime, then you can use assisted injection pattern provided by hilt.
+-> Create an interface(factory class) and mark it with @AssistedFactory annotation.
+-> Mark the objects which are to be provided during runtime using @Assisted annotation.
+-> Mark the class where you want to inject this runtime dependency with @AssistedInject.
+-> Inject this factory in your class and provide all the params which are required during runtime.
+
+//add more insights below

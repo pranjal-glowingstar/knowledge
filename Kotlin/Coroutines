@@ -1,0 +1,19 @@
+
+-> Coroutines are kotlin construct used for asynchronous programming.
+-> The are lightweight and helps switching the threads and thread management efficient and easy for manipulation as per use case.
+-> Coroutines are NOT threads. They run on top of threads.
+-> Primary difference between coroutine and a traditional thread is that threads are more of OS construct whereas coroutines are more of kotlin compiler construct.
+
+-> If we write Thread.sleep(2000), then the thread will be blocked for entire 2 seconds and no work would be done by this thread. It will remain idle.
+-> However, using delay(2000) in coroutines will stop the execution, free the thread, save the state from where it needs to continue execution and then remain suspended for 2 seconds.
+-> In this way, instead of making the thread idle for 2 seconds, coroutines freed the thread and let it do some other work and then continued once the delay got over hence using the threads efficiently.
+
+-> Coroutines follow structured concurrency which means that a child coroutine gets terminated the moment its parent is terminated.
+-> There is a binding of a coroutine lifecycle to that of its parent. This helps in avoiding leaks and forever running.
+
+-> Coroutines support suspended functions.
+-> A suspend function has a special property to pause or leave its execution midpoint.
+-> This works by saving the state of this suspend function in a Deferred class and then loading this same state after the processing is done and then continue from the next line.
+-> Example:- You are doing some work in coroutine. Now there is an API call. Your method will be stopped in midpoint, its state will be saved and the API operation will be performed. After this operation is done, the method will load the states again from the Deferred class and then continue execution.
+
+-> There are various scopes of coroutines
