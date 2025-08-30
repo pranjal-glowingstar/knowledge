@@ -35,4 +35,7 @@
 -> Mark the class where you want to inject this runtime dependency with @AssistedInject.
 -> Inject this factory in your class and provide all the params which are required during runtime.
 
+-> Hilt provides @IntoMap annotation if you want your dependencies in a form of key value pair and inject them based on the key as per use case.
+-> Hilt provides @IntoSet annotation if you want similar type of dependencies in a form of set all to be injected at the same time. Eg Analytics library injections(of firebase, logger and custom all together in one shot).
+
 //add more insights below

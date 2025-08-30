@@ -16,4 +16,23 @@
 -> This works by saving the state of this suspend function in a Deferred class and then loading this same state after the processing is done and then continue from the next line.
 -> Example:- You are doing some work in coroutine. Now there is an API call. Your method will be stopped in midpoint, its state will be saved and the API operation will be performed. After this operation is done, the method will load the states again from the Deferred class and then continue execution.
 
--> There are various scopes of coroutines
+-> There are various scopes of coroutines associated that defines the lifecycle of the coroutine like lifecycleScope of activity/fragment, viewModelScope for View Models and GlobalScope for application level.
+-> These scopes are tied to the lifecycle aware components and get destroyed the moment the component destroys.
+
+-> Coroutines provide a set of dispatchers as well. They define the underlying thread in which the coroutine is gonna run in.
+-> Dispatchers.Main for main thread UI operations, Dispatchers.IO for input output/ API calls, Dispatchers.Default for high performing calculations, Dispatchers.Unconfirmed for tasks which do not come in any of these category.
+-> Context and Scopes are different terms wrt coroutines. Context defines the type of dispatchers + any supervisor for exception handling etc whereas scope defines how long this coroutine is gonna live for.
+
+-> launch{} creates a new coroutine in a given scope. It returns a Job. The moment launch{} is called, it creates a coroutine and jumps to the next statement. It does NOT wait for this block to be executed fully.
+-> async{} creates a new coroutine in a given scope. It returns a Deferred<T> which means that unlike launch{}, async{} gives the result of the execution of the coroutine. The moment async{} is called, it creates a coroutine and jumps to the next statement. It does NOT wait for this block to be executed fully. To get the value of the execution, use await()
+-> withContext(){} is used to switch the context(Dispatcher+Supervisor) of a coroutine to perform operation in a different setting. It does NOT create a new coroutine. The moment it's called, the coroutine is suspended, context is changed and block starts to execute and then finally gives the control back to the caller point after block is completed.
+-> runBlocking{} is used when you want to run a coroutine in a non suspended fashion + serially + line by line.
+-> synchronised{} is an intrinsic lock and is used to run a block in a thread safe manner where only one thread can access a resource at a time. It is not coroutine friendly as it blocks the underlying thread associated with this coroutine.
+-> mutex.withLock{} is a mutual exclusion method and is used to run a block in a thread safe manner where only one thread can access a resource at a time. It is coroutine friendly as it suspends the coroutine and keeps in loop but frees the underlying thread associated with it.
+
+-> If there are multiple children coroutines running and any one of them gives an exception which is not handled, then the parent coroutine is cancelled and accordingly all of its children.
+-> Supervisor Job/ SupervisorScope is used to handle exception handling gracefully if there are multiple coroutines involved and one of them throws exception but you don't want the remaining children to be affected.
+
+-> job.cancel() does not stop the coroutine immediately just because you explicitly said to.
+-> In order for a coroutine to cancel itself, it must have some checks inside it like isActive or any suspended method like delay()/yeild().
+-> These act as a checkpoint for the compiler to decide whether this coroutine should be cancelled or not.

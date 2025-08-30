@@ -1,0 +1,14 @@
+
+-> Obfuscation is the process to reduce the reverse engineering of the APK so that fraud prevention is minimized.
+-> Android uses proguard and R8 for providing obfuscation in our APK.
+
+-> How obfuscation works is it renames all the classes and methods present in the app into some gibberish so that when a hacker tried to de bundle your APK using jadx, it becomes difficult for this person to understand the logic.
+-> The mapping for the changed class and method name is stored in the file mapping.txt and is NOT the part of APK.
+-> One should save this file in local after every release in order to check the mapping correctly.
+
+-> If there is a case where your firebase crashlytics is showing the gibberish class name in the stack trace, then you can upload this mapping.txt file in the console and it will reprint the stacktrace with correct names.
+-> In order to exclude files to not be part of proguard, we can define this in the file proguard-rules.pro.
+-> Reflection based libraries like gson and moshi might have some difficulty in serialization/deserialization by this process because they depend on the name of the variable for mapping.
+
+-> Proguard is also used to reduce our APK size using minify.
+-> It removes all the files(classes and methods included) which are not being used in the application.

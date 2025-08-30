@@ -1,0 +1,32 @@
+
+-> Deeplink is the process of making internal hyperlinks that can open the app directly to a specific page and powering its info in the same link.
+-> This is used for navigation from any external app or a notification to a certain page inside the app.
+-> The format for deeplink is like <name>:// and the scheme of the <name> can be defined in the AndroidManifest file in the intent-filters of the Activity class.
+
+-> Anytime the link is clicked, the Android OS checks for the intent filters that support this deeplink.
+-> The OS then loads the application(if not opened already) and starts the activity associated.
+-> If multiple applications support same deeplink, then an application selector bottom sheet is opened to select the desired app.
+
+-> If the app is not installed then there is some different issue altogether.
+-> The link first redirects to the PlayStore. Then PlayStore prompts to install the APK. Then you onboard and use the app.
+
+-> If there is a campaign which is coming as an ad and has a deeplink of the app then following things happen-
+    -> if app is installed then page is opened directly
+
+    -> If app is not installed then(Case of Install Referral API)
+        -> It goes to PlayStore
+        -> PlayStore has Install Referral API that stores this deeplink and stores all params and other info associated iwth it.
+        -> Your app is installed and then launched.
+        -> During launch, your application can get the required info from this API and can then act accordingly.
+
+    -> If app is not installed(Case of Firebase Dynamic Link)
+        -> It connects with play services and Firebase Dynamic Link and stores the information in google servers.
+        -> It redirects to play store.
+        -> Your app is installed and then launched.
+        -> During launch, the app connects with FDL which connects to Google servers for any information wrt this user.
+
+    -> If app is not installed(Case of AppsFlyer)
+        -> AppsFlyer is an external SDK that can be a part of your application(if you take its dependency)
+        -> Before redirecting to Play Store, it adds this info in its own servers.
+        -> App is installed and then launched.
+        -> During launch, app connects to appsflyer SDK which connects to its backend which connects to Install Referral API eventually to get info of the deeplink

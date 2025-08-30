@@ -1,0 +1,24 @@
+
+-> It is the entry point for a user to interact.
+-> Activity is the class that actually starts the user interactions of touch swipe and inflating basic UI etc.
+-> We can create an Intent(<activity name>::class) like this and use startActivity(intent) to launch.
+
+-> Every activity is to be defined in the AndroidManifest file.
+-> The activity which is the first one to be launched is denoted with action=Main and category=LAUNCHER
+-> We can add intent-filters, receivers, themes, design etc in the Manifest itself.
+
+//Lifecycle
+-> onCreate() tells that the instance of activity is created and view can be inflated now.
+-> onStart() tells that the activity's view is inflated successfully and now is visible to user.
+-> onResume() tells that the activity is ready for user's interaction.
+-> onPause() tells that activity is visible but it's UI is not interactable(cases where a dialog is on top of activity).
+-> onStop() tells that activity is alive but no UI is visible and interactable(cases of background/another activity opening)
+-> onRestart() tells that this activity is coming back to the top of stack again.
+-> onDestroy() tells that the instance of this activity is being destroyed.
+
+//Launch Modes
+-> default mode means that if there is a new intent for an activity created, a new instance will be created again and be added on top of the stack.
+-> singleTop means that only one instance of the activity will be created. If the intent of the activity is called again, then onNewIntent() will be called again and the activity will be coming back to top by swapping its position with other activities.
+-> singleTask means that only one instance of the activity will be created. If the intent of the activity is called again, then onNewIntent() will be called again and the activity will be coming back to top by destroying all other activities on top of it.
+-> singleInstance means that only one instance of the activity will be created and a separate stack will be provided for this activity. This activity is now sole running. Any other activity launched from this will not be part of its stack.
+
