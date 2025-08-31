@@ -1,0 +1,38 @@
+
+-> inline keyword is used when you want to copy the method body directly at the point of invocation.
+-> This helps in avoiding the method call into the stack and is mostly used when a certain method is called multiple times.
+
+-> noinline keyword is used when you want to inline any method but you do now want to inline any parameter inside this method.
+-> This is usually used when there is any lambda function as a param in the inline function but you do not want it to be inline.
+
+-> cross-inline is used when you don't want the params in the inline method to return any local value.
+-> This is usually used when there is a lambda function as a parameter and it is trying to return something.
+
+-> data class is special in nature because it has three methods which are overridden by default.
+-> These methods are toString(), areEquals() and hashCode()
+-> If you are trying to check if two objects of data class are equal, the default check will be done based on the value of the parameters that are passed in constructor of this class.
+-> If the constructor params of two different objects are equal no matter the internal variables are same or different, the equals method will give true.
+
+-> In order to make a separate object of a data class, one should use copy() method and pass all the params which are changing.
+-> If you are passing a mutable list to a data class, make sure to use .toMutableList() else it will hold the same reference of the param which you passed directly.
+
+-> @JvmStatic annotation is used when you want to use the companion object of any kotlin class in java code without using .INSTANCE everytime.
+-> By default, this is the implementation in order to access any property of a kotlin companion object in java <class name>.INSTANCE.<property name>
+-> @JvmField annotation is used when you want to use a field present in a kotlin class directly in java without using getter/setter for the same.
+
+-> reified keyword is used along with inline keyword always.
+-> reified helps to retain the type of the generic inside the method body so that this type could be used for our purposes.
+-> by default, kotlin follows type erasure construct. This means that any generic type method will not be able to hold the type when it comes inside method body.
+-> That is why inline is necessary when using reified keyword because inline will bring the body at the point of execution and then reified could help itself in storing the type.
+
+-> const keyword is better for defining constants because by default all const variables are made inline.
+-> Primary Constructor => init block => Secondary Constructor. This is the order in which blocks are processed.
+
+-> val a="hello", val b="he", val c=b+"llo". print(a===c) will give false because c is a runtime expression and hence referential equality will not hold here.
+-> However, val a="hello", val b="he"+"llo". print(a===b) will give true since the string "hello" and "he"+"llo" are a compile time expression and both are equal.
+
+-> let{} => context object:- it, return value:- lambda result(last executed statement)
+-> apply{} => context object:- this, return value:- this(modified version if there are any changes made in the apply block)
+-> also{} => context object:- it, return value:- this
+-> with => context object:- this, return value:- lambda result(last executed statement)
+-> run{} => context object:- none, return value:- lambda result(last executed statement)

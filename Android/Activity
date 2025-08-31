@@ -22,3 +22,8 @@
 -> singleTask means that only one instance of the activity will be created. If the intent of the activity is called again, then onNewIntent() will be called again and the activity will be coming back to top by destroying all other activities on top of it.
 -> singleInstance means that only one instance of the activity will be created and a separate stack will be provided for this activity. This activity is now sole running. Any other activity launched from this will not be part of its stack.
 
+-> If you want to store states which are simple in nature, then you can use savedStateHandle of the activity.
+-> A callback of onnSavedInstanceState() is called whenever there is a configuration change happening.
+-> You can save the states in the bundle provided in the args of this method.
+-> onRestoreInstanceState() is called when the new instance is created to retrieve any state which was previously saved.
+

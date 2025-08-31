@@ -1,0 +1,21 @@
+
+-> Part of Android component which is used to store UI states and perform all logical operations of UI.
+-> ViewModel is used to separate the UI core and its logical aspect.
+-> UI should be dumb in nature and it is the duty of viewmodel to provide with all the business logic, UI states and core logic in itself.
+
+-> Viewmodel is special because it can survive configuration changes.
+-> Every class like Activity/Fragment etc implements ViewModelStoreOwner class. This is an interface which provides the ViewModelStore.
+-> ViewModelStore is the class that is responsible for storing the viewmodel in a configuration change safe manner.
+-> It is the responsibility of Activity/Fragment to implement ViewModelStoreOwner in such a way that the instance of the viewmodel survives configuration changes.
+
+-> The Activity/Fragment implements this interface by storing the instance of the viewmodel in NonConfigurationInstance class.
+-> NonConfigurationInstance class is part of android OS and is singleton in nature. Hence, anything stored in this will be able to survive configuration changes.
+-> The Activity receives the callback of onConfigurationChange() to decide whether we need to flush out the instance of the viewmodel or not.
+-> Whenever configuration change happens and a new activity is created, it first asks ViewModelStore if any instance of this viewmodel is already present.
+
+-> ViewModelProvider is the class that is used to create the instance of viewmodel.
+-> This class takes two params:-
+    -> First is the owner that defines from which component this instance is gonna be associated with and for how long this instance is gonna live.
+    -> Second is factory which is used to provide some custom implementation of the object creation for this viewmodel.
+
+-> We can actually create a viewmodel that is shared across activities by passing the owner in ViewModelProvider as application context.
