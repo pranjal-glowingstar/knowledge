@@ -1,0 +1,31 @@
+
+-> Flows are kotlin coroutines construct and work on a publisher subscriber model.
+-> They are used to pass information from one component to another in a lifecycle independent form.
+-> Flows are of two types:-
+    -> Cold flows are the ones where the emission of a value happens only when there is a collector attached.
+    -> Hot flows are the ones where the emission of a value happens irrespective of a collector present.
+-> Emission and Collection of a flow is done in a coroutine scope.
+
+-> flow{} returns a cold flow from the given suspendable block.
+    -> Eg making a basic flow block to perform some operations.
+
+-> snapshotFlow{} returns a cold flow and is mostly used in compose UI to emit a value whenever there is a change in the observed state.
+    -> Eg listening to a scroll state and emitting true/false if the scrolling is at last point.
+
+-> channelFlow{} returns a cold flow and allows you to launch multiple coroutines inside and send values to the same flow concurrently.
+    -> Unlike flow{} where only one coroutine runs, channelFlow{} can have multiple coroutines launched.
+    -> Eg trying to send the result of flow A which is in IO Dispatcher to a flow B which is in Main Dispatcher.
+
+-> MutableStateFlow() returns a hot flow and is used in places where only the latest emitted value is required. It has a repeat of 1.
+    -> Eg Managing UI states of a compose function.
+
+-> MutableSharedFlow() returns a hot flow is is used for the purpose of broadcasting. It doesn't store any value in itself unless repeat is specified.
+    -> Eg Event driven architecture like analytics, navigation etc.
+
+-> Flows are better than LiveData because they provide additional support of kotlin extension functions like filter{}, transform{}, map{} etc which is not possible in livedata.
+-> In order to make a flow act as LiveData, we can use flowWithLifecycle()/ repeatOnLifecycle() method and pass the owner to mimic the livedata behaviour.
+-> shareIn() is used to convert a cold flow into a hot one in a given coroutine scope.
+
+-> sequence{} is a kotlin construct that is used to emit values in a synchronous manner.
+-> Unlike flows which run over coroutines, sequence runs directly independent of coroutine.
+-> The code inside runs lazily ie values are computed only when requested by iteration.
