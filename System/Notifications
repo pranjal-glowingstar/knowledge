@@ -1,0 +1,25 @@
+
+-> A mechanism through which we get to know what different updates are happening wrt our app even if it is not in memory.
+-> Notifications are of two types. One is local notification that uses client as source of truth and other is push notification which are triggered by the server.
+-> Whenever the notification is arrived, the android OS loads your application in the process. However, it is not shown in recents because this is kind of a pre warm load.
+
+//client notifications
+-> We can use two in built APIs for this. One is AlarmManager and the second is NotificationManager.
+-> In order to send notification, we must have a NotificationChannel. This is the abstract mechanism which is used to group a set of common types of notification.
+-> One should create this notification channel directly in the application class so that notifications are initialized the moment your application is loaded.
+-> NotificationChannel is the class to create this channel. We use NotificationCompat class to create the notification.
+
+//push notifications
+-> Push notification works on the mechanism of client server broadcast. It is the server which tries to send the notification to the app.
+-> We need to register our app in firebase cloud messaging(FCM) console with our package name.
+
+-> Registration will give us two files. google-services.json and service-account.json
+    -> google-services.json is the client file and is stored in the apk bundle. This contains client ID and api key and is used to talk with FCM.
+    -> service-account.json is the server file and is stored in the server's db. This also contains some tokens and private key and is used to connect with FCM.
+
+-> After the app is launched, the app calls the FCM SDK already integrated in the app to give a FCM token.
+-> FCM SDK connects with firebase and gives a token for this device and package combination.
+-> This token is then sent to our server anda mapping is stored.
+-> Whenever the backend needs to send any kind of notification to the app, it connects with FCM and passes our token as auth header along with payload.
+-> FCM processes this request and then sends a notification to the user. Every device which is online has a persistent connection with the FCM so FCm knows which user is to be sent notification.
+-> Google Play Services is the first to receive the message. It loads the app into memory and calls FirebaseMessagingService.onMessageReceived()
