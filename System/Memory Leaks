@@ -1,0 +1,17 @@
+
+-> Memory leak is an app issue which occurs whenever one tries to access a resource which is existing more than the scope it should be in.
+
+-> Primary cases includes
+    -> Launching coroutines in GlobalScopes making them running for a longer period.
+    -> If at this time a coroutine tries to access any resource which is not singleton and is destroyed, then crash may happen.
+    -> Having the cotext of an activity/fragment inside a viewmodel. This should be avoided because the context changes with the configuration change.
+    -> Adding/registering a receiver but not unregistering it. This may lead to unattained connections leading to memory leaks.
+    -> Creating a lot of singleton classes/objects that could've been easily scoped down.
+
+-> In order to detect memory leaks, we use leak canary. This is an in built android tool that tracks leaks effectively.
+-> Leak Canary works by collecting the heap of the application and then determines for how long this object was alive.
+-> It also smartly determines if this object should even be alive at any given time by checking the components which are destroyed and which are not using garbage collector.
+-> Leak Canary then generates the entire report along with stack trace and gives the exact point where the leak is happening.
+
+-> In order to fix leaks, always maintain the scope of any component as per use case. Try to avoid singletons, unregister your receivers in onDestroy().
+-> Storing contexts in weak reference or using application context in the first place will also help in reducing leaks.

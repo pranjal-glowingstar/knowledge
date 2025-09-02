@@ -1,0 +1,20 @@
+
+-> Memory Management is an important aspect of Android OS to maintain RAM usage and provide the memory to apps which are heavy usage in nature.
+-> It is responsible for maintaining the apps to be in recents or not, whether to kill any process or view or not etc.
+-> OS gives the callback of onTrimMemory() when there is some memory constraints. One can manually release memory by destroying some components.
+-> Garbage Collector is the one that is running between the processes and trying to collect any object that is not in use as soon as possible.
+
+-> If there is any memory constraint, the OS follows the following hierarchy:-
+    -> The first process to be killed are the empty processes
+        -> Basically the process with no active components and sitting idle.
+    -> The second process to be killed are the background processes.
+        -> Activity at onStop(), UI is not visible and interactable but still in memory to preserve state.
+    -> The third process to be killed is the service process.
+        -> Services running in foreground/background and performing tasks. Eg music player.
+    -> The fourth process to be killed is the visible process.
+        -> Activity at onPause(), multiple fragments in the stack but only very few visible so remaining views can be destroyed.
+    -> The final process to be killed is the foreground process.
+        -> The component with which the user is currently interacting with is the last one to be killed.
+
+-> One should make sure that memory management can be triggered at any point in time.
+-> The app must be ready for any destruction of any component and should save properly its states and other important data.
