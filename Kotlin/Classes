@@ -1,0 +1,42 @@
+
+-> Kotlin contains different types of classes
+
+-> Normal classes
+    -> Simple typical classes that have some data members and member functions that define the property of any object.
+
+-> Data classes
+    -> Similar to a normal class but provide a more depth to any object.
+    -> Always require one constructor and always require at least one parameter in that constructor.
+    -> data classes cannot be created with an empty constructor.
+    -> The methods of toString(), hashcode() and areEquals() are overridden by default in such a way that the only constructor values are used to check.
+    -> If two different objects with same property present in constructor are created, then == and === both give true even if any internal property not part of constructor is different.
+
+-> Object
+    -> This provides a singleton instance of any class.
+    -> Object do NOT contain any constructor.
+    -> They are kinds static classes and all methods and members are called directly via name.
+
+-> Enum classes
+    -> Classes that contain a similar kind of data but do not have any major property associated to it.
+    -> They mostly act as a constants that have a specific type or kind associated with them.
+    -> Mostly used to define some constants which are a property of any kind instead of making multiple const val variables.
+
+-> Sealed classes
+    -> Mostly similar to Enum classes but rather than having constants, we can have give some more depth to it by defining some properties.
+    -> NOT inheritable by any class except the inner classes which are defined inside it.
+    -> Mostly used for defining any kind of states.
+
+-> Abstract classes
+    -> These are the classes which have some methods in itself that are not defined yet(only declaration no body).
+    -> Any class extending it must implement these abstract methods/fields or mark itself as abstract.
+
+-> Value classes
+    -> Used to store some primitive value but as a class and not a variable.
+    -> We can define some rules to storing this value in the class. Like storing an email address.
+
+-> Classes in kotlin by default are private in nature.
+-> In order to extend any class, one must make it an open class.
+-> Kotlin does not support multiple inheritance in itself.
+-> Kotlin follows type erasure. Meaning that the type of any child class will get lost if the method contains parent class type as parameter.
+-> Nested class are the classes which are declared inside another class. A nested class does NOT have the access to its parent class variables and methods.
+-> Inner class are the classes which are declared inside another class. An inner class have the access to its parent class variables and methods.
