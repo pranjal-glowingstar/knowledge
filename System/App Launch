@@ -1,0 +1,34 @@
+
+-> It refers to the time taken in order to load the first frame of the application from the click of your app icon or from an intent.
+-> This is an important metric as it decides the overall user experience while loading all important resources before user starts interaction.
+
+//types of launch
+-> Cold launch happens when your app is not in the memory(recents)
+    -> The system's zygote process(the super of all processes) forks itself to load your application.
+    -> After the forking, it connects with Binder IPC to create an instance of your application.
+    -> After instance creation, the application's onCreate() is called where you do all your initialization and provide entry point for hilt DI graph.
+    -> Then the android system checks for the Manifest file to find activity which has action MAIN and category LAUNCHER
+    -> Then the activity is opened and all lifecycle methods are called accordingly.
+
+-> Warm launch happens when your application is already in memory but due to memory constraints/idle time, the activity associated with it is destroyed.
+    -> When app is opened again in warm launch, the activity is created again.
+    -> ActivityTaskManagerService triggers the intent to start this activity with all states getting created again.
+
+-> Hot launch happens when your application is already in memory and is also not destroyed.
+    -> The activity's onRestart() is called which triggers onStart() and then onResume()
+
+-> One should not perform heavy operations in the launch time as this may lead to slow load time and bad UX.
+-> Objects which are instantiated should be lazy in nature so that creation happens only when the value is accessed.
+-> Amount of API calls should be minimized and should not be blocking in nature.
+-> Connection time also plays a crucial role here as launch is the first time your app is gonna connect with backend and exchange SSL certification and token refresh.
+-> Always follow an offline first architecture so that there is some pre loaded data which can be shown till updated one comes.
+
+-> One can use perfetto trace in order to track the launch time by seeing all the classes and methods which are being called and how much time are they taking.
+-> One can also use Android's profiler to track all activity of memory usage, network calls etc.
+-> Adding analytics to the flow helps trace the time latency for p90 and p95.
+
+-> Profiling and Baseline Profiling also helps reduce launch time.
+    -> When your APK is uploaded to play store, the release is done slowly to gather the data of a new update using cloud profiles.
+    -> This data collects all the information about how many classes and methods are being called during launch.
+    -> This data is then used to optimize the dex file of the APK where the classes and methods which are called during start are added to the start of the dex file.
+    -> This uploading in start helps optimize parsing of the dex quickly and uploading to memory by less page checks.

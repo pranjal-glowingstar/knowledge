@@ -19,6 +19,7 @@
 -> @JvmStatic annotation is used when you want to use the companion object of any kotlin class in java code without using .INSTANCE everytime.
 -> By default, this is the implementation in order to access any property of a kotlin companion object in java <class name>.INSTANCE.<property name>
 -> @JvmField annotation is used when you want to use a field present in a kotlin class directly in java without using getter/setter for the same.
+-> @JvmOverloads annotation is used when you want to use any kotlin method which has some default params in java. By default when using kotlin methods in java, the method signature dose not see any default params.
 
 -> reified keyword is used along with inline keyword always.
 -> reified helps to retain the type of the generic inside the method body so that this type could be used for our purposes.

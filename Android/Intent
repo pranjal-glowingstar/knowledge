@@ -1,0 +1,16 @@
+
+-> Intent is an Android construct that defines and intention of a user for any action.
+-> Intents are a fundamental aspect of Android and are used to perform operations of starting an activity/services, sending broadcasts etc.
+
+//types of Intents
+-> Explicit Intents are the one that are well defined in nature and have a specific action to perform.
+-> These include you starting any activity/service/broadcast, opening a specific app etc. Mostly used within the app.
+-> The system doesn’t need to search. It goes straight to the target component.
+
+-> Implicit Intents are the one that are generic in nature and can trigger multiple flows when called.
+-> These include opening an app that supports chats or any other feature. Lets the system (PackageManager) find the best app (or let the user choose) to handle the request.
+-> System checks all apps’ <intent-filter> in their AndroidManifest.xml to decide the opening.
+
+-> PendingIntent are the ones that are used to trigger some of your code in any other application.
+-> It lets that other app execute your intent on your behalf with your app’s identity and permissions, even if your app’s process is killed.
+-> Used in notifications(clicking of notification opens app), Alarm Manager etc.
