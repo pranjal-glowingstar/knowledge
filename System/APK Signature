@@ -1,0 +1,29 @@
+
+-> An APK signature is a cryptographic signature embedded in (or paired with) an APK that proves:
+   -> who built the APK (identity of the signing key), and
+   -> that the APK hasn’t been modified since it was signed (integrity).
+
+-> Android verifies this at install time (and sometimes at runtime).
+-> Updates are only allowed if the same app identity (same signer or an allowed rotation lineage) is preserved.
+-> It defines the ownership of the code present in the APK.
+
+-> It is important because anyone can decompile the APK and make changes so it makes sure that you are installing the correct, authentic and verified one only.
+-> If any update is coming, then the same key should sign the newer version which basically makes sure that the developer is the one pushing the update.
+
+-> In order to generate signature, we have java's keystore. This generates a .jks file which has information about our keys.
+    -> First is the private key which is used to create the hash of the entire APK and its contents.
+        -> If this is lost then you cannot upload any update.
+        -> If this key is stolen, then the other person can pretend that it's you and can upload some malicious update.
+    -> Second is the public key certificate which is used to verify the hash once installed.
+        -> When app is getting installed, this public key certificate is used to decrypt the hash and see if the contents of the APK and the decrypted result from hash are matching or not.
+
+-> If you don't want to store this private key to yourself, you can use Google Play App Signing. This process also creates two keys
+    -> First is called App Singing key(your passport)
+        -> This key acts as a private key and is stored in google servers safely.
+        -> Whenever you upload your unsigned key, google used the app signing key and signs the APK on your behalf.
+    -> Second is called upload key(your boarding pass)
+        -> This is the key you use to sign any APK manually and upload it to play store.
+        -> This key is then verified by google if this manual upload is coming from the correct developer.
+        -> If this key is lost, then you can still recover by requesting a new one.
+
+-> It is the package manager class that is responsible to check if the apk is signed or not before installing.
