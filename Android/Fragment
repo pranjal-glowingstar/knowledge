@@ -1,0 +1,31 @@
+
+-> A fragment is an android component which defines a part of the flow's interaction.
+-> Eg. if Flow is login then it will be driven by login activity and the components of OTP, MPin, SSO and other screens will be driven by fragments.
+
+//lifecycle
+-> onAttach() tells that the fragment is being attached to activity/parent fragment.
+    -> The context argument of this method contains the context of the caller who is attaching the fragment(activity/parent fragment).
+-> onCreate() tells that the instance of the fragment is made and any initialization work can be done.
+-> onCreateView() tells that the instance is ready to inflate the view for this fragment.
+-> onViewCreated() tells that the view is successfully inflated and measured. Any observers/collectors can be added now.
+-> onStart() tells that the fragment's view is now visible to the user.
+-> onResume() tells that the fragment's view is now interactable to the user.
+-> onPause() tells that fragment is visible but it's UI is not interactable(cases where a dialog is on top of fragment)
+-> onStop() tells that fragment is alive but no UI is visible and interactable(cases of background)
+-> onDestroyView() tells that the fragment's view is getting destroyed.
+    -> There may be cases where fragment's instance is available but it's view is destroyed like memory constraints, inactivity of the UI etc.
+-> onDestroy() tells that the fragment's instance is getting destroyed.
+-> onDetach() tells that the fragment is getting detached from the host.
+
+-> supportFragmentManager is android component used to do fragment transactions from activity. It is exclusive to activity.
+-> childFragmentManager is android component used to do fragment transactions from a parent to a child.
+-> parentFragmentManager is android component used to communicate upward from child to parent in a fragment transaction.
+
+-> add() is used when you need to add any fragment on top of the other. add() does NOT remove any fragment from the container in order to display.
+-> replace() is used when you need to show only one fragment inside a container. It removes all existing fragments in the container and then shows itself.
+-> Both add() and replace() DO NOT remove the instance of fragment from the back stack. They just reorder the stack to mark themselves visible.
+-> replace() calls onPause() and onStop() of the fragment always but add() only calls one or both of them if we explicitly hide()/show() any fragment.
+
+-> addToBackStack() tells the FragmentManager to remember this transaction so the user can reverse it with the Back button.
+-> If you do not use addToBackStack() when using add()/replace(), the transaction will not be saved in the back stack and on pressing back, the activity will be finished.
+-> Multiple fragments can share a same instance of a viewModel by passing requireActivity() or requireParentFragment() in the owner of ViewModelProvider.

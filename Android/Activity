@@ -26,4 +26,7 @@
 -> A callback of onnSavedInstanceState() is called whenever there is a configuration change happening.
 -> You can save the states in the bundle provided in the args of this method.
 -> onRestoreInstanceState() is called when the new instance is created to retrieve any state which was previously saved.
+-> The bundle present in onCreate() of the activity is the bundle that contains the states of the previous instance of the same activity if there was any configuration change.
+-> If the bundle is null, that means the activity is getting created for the first time.
+-> The difference between onCreate() and onRestoreInstanceState() bundle is that onRestoreInstanceState() is called only when there is a non null bundle present, ie there was some state saved by us before configuration changes.
 
