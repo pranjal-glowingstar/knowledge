@@ -1,0 +1,19 @@
+
+-> ANR stands for Application Not Responding.
+-> This happens when the main thread is blocked for more than 5 seconds and is performing non UI operations.
+-> This is a very big issue as it makes user experience bad.
+
+-> In order to fix ANRs, we can use strict mode.
+-> Strict mode tells us the exact work that the main thread is doing by checking its message queue.
+-> We can also print the entire message queue along with all the methods that this thread called during execution.
+-> The data gives exact details of the number of methods and the amount for which it was running.
+-> Strict mode is only limited to tracking a specific set of problem(like checking a thread, checking a disk, checking a network).
+
+-> We can also check the firebase console for the same. The stack trace does not give a very great idea but can be used for starters.
+
+-> One can also use perfetto Trace to track the entire user journey to track where ANR occurred.
+-> Trace also gives similar insights like strict mode.
+-> However, this gives some more in depth information about the system and all the thread pools currently working.
+
+-> The industry standard rate for ANRs is 0.47%. So if ANRs are >0.47% then your app is flagged as bad behaviour.
+-> less than 0.24% is generally considered good. Many top apps target <= 0.1 % to stay well under the line.
