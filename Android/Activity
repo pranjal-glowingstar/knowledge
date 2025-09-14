@@ -30,3 +30,5 @@
 -> If the bundle is null, that means the activity is getting created for the first time.
 -> The difference between onCreate() and onRestoreInstanceState() bundle is that onRestoreInstanceState() is called only when there is a non null bundle present, ie there was some state saved by us before configuration changes.
 
+-> Activity survives configuration changes if declared with android:configChanges in the Manifest file.
+

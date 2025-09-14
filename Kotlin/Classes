@@ -40,3 +40,4 @@
 -> Kotlin follows type erasure. Meaning that the type of any child class will get lost if the method contains parent class type as parameter.
 -> Nested class are the classes which are declared inside another class. A nested class does NOT have the access to its parent class variables and methods.
 -> Inner class are the classes which are declared inside another class. An inner class have the access to its parent class variables and methods.
+-> final keyword is used to make a class non-inheritable. All classes in Kotlin are final by nature.

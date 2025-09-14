@@ -1,0 +1,3 @@
+
+-> write-through cache caching strategy updates both cache and database at the same time.
+->

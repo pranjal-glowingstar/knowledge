@@ -1,0 +1,6 @@
+
+-> Internally LiveData mainly uses a SafeIterableMap (a custom observable map) to track observers.
+-> fun ClassName?.functionName() — you declare the receiver as nullable with ?. This function is used to create an extension function that can be called on null objects safely.
+-> Coroutines started with launch{} are cancellable by default.
+-> LinkedHashMap or LinkedHashSet preserves insertion order in the list/set.
+-> object declarations (singletons) or companion object functions can be called without creating an instance.

@@ -1,0 +1,6 @@
+
+-> Binder (the android.os.Binder class) is the base entry point for all Binder IPC(Inter Process Communications).
+-> ConstraintLayout is best for nesting complex UI with performance in mind.
+-> Activity or Fragment handles runtime permissions via requestPermissions() and onRequestPermissionsResult().
+-> Window → ViewRootImpl → View hierarchy` handles drawing the UI. This component is responsible for drawing the UI on screen.
+-> WorkManager allows background work that guarantees execution even after app kill or device restart.
