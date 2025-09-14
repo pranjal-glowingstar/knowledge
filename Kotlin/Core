@@ -37,3 +37,9 @@
 -> also{} => context object:- it, return value:- this
 -> with => context object:- this, return value:- lambda result(last executed statement)
 -> run{} => context object:- none, return value:- lambda result(last executed statement)
+
+-> Delegation is the process of defining any property or initializing any variable using `by` keyword. This directly imports the getter and setter for this variable.
+    -> Eg private val viewModel: ViewModel by viewModels(). val state by viewModel.state.collectAsStateWithLifecycle()
+-> Destructuring is the process of breaking the object into multiple components without directly using the property accessors(by using dot)
+    -> Destructuring depends if we have component() method for all the variables which we are destructuring.
+    -> Eg. val pair1 = Pair("Pranjal", 26). val (name, age) = pair1

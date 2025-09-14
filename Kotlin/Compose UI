@@ -1,0 +1,63 @@
+
+-> A declarative style of making UI and is recommended library for making UI elements by android.
+-> Declarative UI tells what is to be displayed instead of how it is to be displayed.
+-> Compose UI shifts the paradigm of architecture from MVVM to MVI.
+
+//lifecycle
+-> Composition tells that this composable is being called again and all its states are being checked to decide whether we need to recompose this UI or not.
+-> Layout tells that the position and relative order for this composition is being decided right now.
+-> Draw tells that the composable is getting drawn on the screen.
+
+-> It is not always that all these three lifecycle states will be called one after another.
+-> Compose is smart enough to decide which part of the lifecycle can be skipped to improve performance.
+
+-> Recomposition is the mechanism in which a compose function is re rendered and all its lifecycle calls are performed based on states and performance optimizations.
+-> Recomposition happens on value based and not reference based.
+    -> Eg, if a data class has two arguments and you change any one of them, the recomposition will not occur because the reference of the object was same.
+    -> If we would've mande another data class(different object, difference reference) with new states, then recomposition would've occurred.
+-> Compose always tries to minimize its recomposition. This is called compose skipping.
+-> Compose state variables are stored in slot table where setContent{} or ComposeView is being initialized. These are stored in a form of tree hierarchy.
+
+-> If we are calling multiple compose methods together for rendering, it is not necessary that all of them will be rendered sequentially.
+-> Compose renders UI in multiple coroutines concurrently in UI thread so there is no order that is followed to render UI.
+
+-> mutableStateOf() is used to create a mutable state inside any composable with a value.
+-> derivedStateOf() is used to create a mutable state inside any composable whose value depends upon a combination from other states.
+    -> Eg, changing the background of a screen based on if the size of a list is even or odd.
+-> remember{} is used to create a snapshot of any state and store it in slot table to use it for deciding recomposition.
+    -> It keeps the value as long as composable in in composition.
+-> rememberSavable{} is same as remember{} except that rememberSavable{} can survive configuration changes.
+-> rememberUpdatedState() is used when you need to remember a state in a composable which is coming as a method parameter and you always need the latest updated state whenever this method's recomposition is happening and argument value is changing.
+    -> This only works with data types that can be stored in a bundle.
+
+-> In order to add any custom value across view hierarchy, we can use CompositionLocalProvider.
+-> This class along with compositionLocalOf() method is used to create a key value pair across view hierarchy.
+
+-> rememberCoroutineScope() is used when you want to launch a coroutine in a composable. This is different from SideEffects.
+-> State Hoisting refers to the mechanism in which we shift the states of the child composable to that in parent.
+    -> This helps in keeping our composable methods as stateless as possible.
+    -> The states are passed as an argument rather than using remember{} block inside the composable.
+
+-> setContent{} is the entry point of compose UI. This tells compiler that UI is now being made using compose.
+-> Surface{} is the compose block which is used to provide elevation, background and other core properties to the UI element.
+-> Theme{} is the compose block which is used to provide the theme and colors across UI hierarchy.
+-> Scaffold{} is the compose block which is used to provide some basic level elements like top navigation bar, bottom tabs bar footers etc across UI hierarchy.
+
+-> Effect Handlers are compose components to handle side effects. Side effects means a consequence.
+-> When we try to use some variables that are outside the scope of composable, then it may have a consequence in the state of this composable.
+
+-> LaunchedEffect(..){} takes set of keys, and calls this block every time any one of the key changes.
+-> These keys are usually states hoisted in this composable.
+-> The block inside gives a coroutine scope so any suspend function can also be called inside directly.
+-> If the key is changed again, the current coroutine scope and all its coroutines will be cancelled and a new block will be generated with new coroutine scope.
+
+-> SideEffect{} is called whenever there is a recomposition of a composable.
+-> This basically helps us to track the number of recompositions happening for this composable and for functionalities that depend on every recomposition.
+
+-> DisposableEffect(..){} is similar to launched but is called only when compose is going outside the scope of view hierarchy.
+-> DisposableEffect contains a method called onDispose() that must be defined if using disposable effect.
+-> Usually used to reset/clear states, remove any collectors/observers/receivers etc.
+
+-> If we have one key in both launched and disposable effect and we change it
+    -> The launched effect will cancel it's coroutine and rerun itself by launching a new block.
+    -> The disposable effect will process its onDispose{} block and then rerun itself by launching a new block.
