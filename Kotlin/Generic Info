@@ -4,3 +4,7 @@
 -> Coroutines started with launch{} are cancellable by default.
 -> LinkedHashMap or LinkedHashSet preserves insertion order in the list/set.
 -> object declarations (singletons) or companion object functions can be called without creating an instance.
+
+-> You have a vertical scrollable list and in each list item of this vertical scrollable list, we have a horizontal scrollable list.
+-> We have to implement a logic which states that if any one row is horizontally scrolled, all the rows should scroll.
+-> If we pass same instance of rememberLazyListState(), then the scrolling will not work as expected.

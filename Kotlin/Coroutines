@@ -36,3 +36,23 @@
 -> job.cancel() does not stop the coroutine immediately just because you explicitly said to.
 -> In order for a coroutine to cancel itself, it must have some checks inside it like isActive or any suspended method like delay()/yeild().
 -> These act as a checkpoint for the compiler to decide whether this coroutine should be cancelled or not.
+
+-> We can race the two calls and react to whichever finishes first by using select {} from kotlinx.coroutines.
+-> select{} lets you await the first result among multiple suspending calls and cancel the rest.
+EG:- suspend fun <T> fetchFirst(
+      local: suspend () -> T,
+      remote: suspend () -> T
+  ): T = coroutineScope {
+      select<T> {
+          async { local() }.onAwait { value ->
+              // Local wins
+              value
+          }
+          async { remote() }.onAwait { value ->
+              // Remote wins
+              value
+          }
+      }.also {
+          // Remaining coroutines are automatically cancelled when select completes
+      }
+  }

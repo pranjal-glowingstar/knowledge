@@ -1,0 +1,22 @@
+
+-> Service is an android component used to perform long running tasks in background or foreground independent of UI.
+
+//types
+-> Normal Service
+    -> Used to perform operations in foreground
+    -> Always runs on main thread.
+    -> Needs you to manage threading and stopping.
+    -> context.startService() and context.stopService()/stopSelf()
+-> Bound Service
+    -> Similar to normal service but here the service is bound to a lifecycle aware component(s).
+    -> The lifecycle is determined by the owner(s) in which it is tied to.
+-> IntentService
+    -> Used to perform operations in background.
+    -> Runs on a background worker thread.
+    -> Deprecated now
+-> JobIntentService
+    -> Similar to IntentService but for Android O and below.
+    -> Schedules work with the JobScheduler on newer devices and still runs as a service on older ones.
+-> LifecycleService
+    -> Normal service but with a lifecycle owner.
+    -> Helps to provide a lifecycleScope to launch coroutines inside instead of GlobalScope.
