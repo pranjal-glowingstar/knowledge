@@ -13,7 +13,7 @@
 
 -> Coroutines support suspended functions.
 -> A suspend function has a special property to pause or leave its execution midpoint.
--> This works by saving the state of this suspend function in a Deferred class and then loading this same state after the processing is done and then continue from the next line.
+-> This works by saving the state of this suspend function in a Continuation class and then loading this same state after the processing is done and then continue from the next line.
 -> Example:- You are doing some work in coroutine. Now there is an API call. Your method will be stopped in midpoint, its state will be saved and the API operation will be performed. After this operation is done, the method will load the states again from the Deferred class and then continue execution.
 
 -> There are various scopes of coroutines associated that defines the lifecycle of the coroutine like lifecycleScope of activity/fragment, viewModelScope for View Models and GlobalScope for application level.
@@ -56,3 +56,5 @@ EG:- suspend fun <T> fetchFirst(
           // Remaining coroutines are automatically cancelled when select completes
       }
   }
+
+-> In order to make multiple coroutines wait all at once, we can use awaitAll(job1,async1...) method

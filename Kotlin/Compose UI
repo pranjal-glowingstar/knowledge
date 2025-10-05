@@ -61,3 +61,6 @@
 -> If we have one key in both launched and disposable effect and we change it
     -> The launched effect will cancel it's coroutine and rerun itself by launching a new block.
     -> The disposable effect will process its onDispose{} block and then rerun itself by launching a new block.
+
+-> IntrinsicSize.Min/Max is the property that helps you to query all your children before they are actually measured.
+-> This is mainly used along with Modifier functions like width/height to provide the width/height as per the largest/smallest child size.
