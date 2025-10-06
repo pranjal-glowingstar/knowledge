@@ -1,0 +1,18 @@
+
+-> AppSize is a metric that calculates the size of the APK in MB and teh storage it's gonna take when decompiled.
+-> This is a very important metric as it is a good practice to have the size of an APK as small as possible.
+
+-> In order to reduce the size, we can do following things:-
+    -> In builtVariants block of your module level build.gradle you can add the following:-
+        -> minifyEnabled = true (for removing unnecessary classes and methods not in use)
+        -> shrinkResources = true (for reducing the size of the storage assets)
+        -> crunchPngs = true (reducing PNGs in your application)
+    -> Download the resources from CDN instead of storing in assets file and enabling cache when downloaded.
+
+-> One can use APKInspector to analyse the APK file and see what all resources are present.
+    -> Inspector tells us how many files are present in the APK, what is the size of the APK and each component.
+    -> It shows all the dex files and how they are arranged for both code and external dependencies.
+    -> It also shows the remarks like adding support for 16 kb page size etc.
+    -> One can also compare two different APKs of same project to check how much difference in size has increased/decreased.
+
+-> One can use app bundles(AAB) instead of APK as it only adds the resources/languages etc that are configurable for your device.
