@@ -1,0 +1,16 @@
+
+-> Components used for adding and executing runnables and tasks in a thread.
+
+-> Handler is the component used to interact with the message queue of a thread.
+-> MessageQueue is the component that stores all the tasks and runnables that will be running in thread.
+-> Looper is the component that continues to loop around this message queue and takes out runnables one at a time and executed it in the thread.
+
+-> Looper runs an infinite loop processing messages from the thread’s message queue.
+-> Main Looper is created inside the ActivityThread.main()
+-> Each thread may have exactly one Looper, accessed via Looper.myLooper()
+
+-> Handler is associated to a looper. It stores the Looper and message queue but not the entire thread.
+-> Handler Obtains a Message from pool, Sets msg.callback = runnable, Inserts it into MessageQueue (sorted by time)
+
+-> MessageQueue Holds Message objects (not just Runnables).
+-> There is 1 message queue per looper.

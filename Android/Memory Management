@@ -18,3 +18,7 @@
 
 -> One should make sure that memory management can be triggered at any point in time.
 -> The app must be ready for any destruction of any component and should save properly its states and other important data.
+
+-> LowMemoryKillerDaemon(lmkd) is the component which is responsible for memory management for Android devices.
+-> Android kills processes, not components. LMK uses OOM_adj ranking and PSI pressure to pick the least important cached process and SIGKILL it instantly.
+-> Only persistent storage and saved instance state survive.

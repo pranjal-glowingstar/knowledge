@@ -8,12 +8,12 @@
 -> We can add intent-filters, receivers, themes, design etc in the Manifest itself.
 
 //Lifecycle
--> onCreate() tells that the instance of activity is created and view can be inflated now.
--> onStart() tells that the activity's view is inflated successfully and now is visible to user.
+-> onCreate() tells that the instance of activity is created and view can be inflated now(only inflation not making it visible).
+-> onStart() tells that the activity's view is inflated successfully and activity is coming to the foreground. It may still be partially obscured or transitioning.
 -> onResume() tells that the activity is ready for user's interaction.
--> onPause() tells that activity is visible but it's UI is not interactable(cases where a dialog is on top of activity).
+-> onPause() tells that activity is about to lose focus — another activity (or dialog) is partially or fully covering it.
 -> onStop() tells that activity is alive but no UI is visible and interactable(cases of background/another activity opening)
--> onRestart() tells that this activity is coming back to the top of stack again.
+-> onRestart() tells that this activity was stopped and is being restarted — it’s coming back to the foreground.
 -> onDestroy() tells that the instance of this activity is being destroyed.
 
 //Launch Modes
@@ -32,3 +32,5 @@
 
 -> Activity survives configuration changes if declared with android:configChanges in the Manifest file.
 -> Application.registerActivityLifecycleCallbacks() is used to register the lifecycle callbacks of the activity.
+
+-> When activity B is called on top of activity A, then this is the lifecycle order => A's onPause() -> B's onCreate() -> B's onStart() -> B's onResume() -> A's onStop()

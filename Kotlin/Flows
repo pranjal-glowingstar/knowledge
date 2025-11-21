@@ -29,3 +29,5 @@
 -> sequence{} is a kotlin construct that is used to emit values in a synchronous manner.
 -> Unlike flows which run over coroutines, sequence runs directly independent of coroutine.
 -> The code inside runs lazily ie values are computed only when requested by iteration.
+
+-> When a collector is cancelled, Flow sends a CancellationException upstream, cancelling map filter debounce flatMapLatest network calls (suspend functions) Room queries Retrofit
