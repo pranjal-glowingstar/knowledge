@@ -1,6 +1,6 @@
 
 -> ANR stands for Application Not Responding.
--> This happens when the main thread is blocked for more than 5 seconds and is performing non UI operations.
+-> This happens when the main thread is blocked for a long time and is performing non UI operations.
 -> This is a very big issue as it makes user experience bad.
 
 -> In order to fix ANRs, we can use strict mode.
@@ -15,5 +15,15 @@
 -> Trace also gives similar insights like strict mode.
 -> However, this gives some more in depth information about the system and all the thread pools currently working.
 
+-> The application's onCreate() optimizations also help in reducing ANR related to launches.
+
 -> The industry standard rate for ANRs is 0.47%. So if ANRs are >0.47% then your app is flagged as bad behaviour.
 -> less than 0.24% is generally considered good. Many top apps target <= 0.1 % to stay well under the line.
+
+-> Android uses ActivityManagerService and WindowManagerService to determine the timeout for the ANR.
+    -> Input dispatching (touch, key events)	5 seconds
+    -> BroadcastReceiver (foreground)	10 seconds
+    -> BroadcastReceiver (background)	60 seconds
+    -> Service.startService() + onCreate()	20 seconds
+    -> Service.onStartCommand()	20 seconds
+    -> ContentProvider.onCreate()	10 seconds

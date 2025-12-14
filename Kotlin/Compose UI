@@ -64,3 +64,10 @@
 
 -> IntrinsicSize.Min/Max is the property that helps you to query all your children before they are actually measured.
 -> This is mainly used along with Modifier functions like width/height to provide the width/height as per the largest/smallest child size.
+
+-> @Immutable This annotation makes a strong promise to the Compose compiler that once an instance of the class is created, its properties will never change.
+-> This is the highest level of stability.
+-> When a composable function receives an @Immutable object as a parameter, Compose knows it can safely skip recomposition of that composable and its children if the object reference itself hasn't changed.
+
+-> @Stable annotation tells the Compose compiler that the class is not necessarily immutable, but its properties can change in a way that the Compose runtime will be notified of those changes.
+-> Classes annotated with @Stable must fulfill a contract: the result of equals() for two instances must always be the same, and if any public property of the type changes, composition must be notified.
