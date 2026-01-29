@@ -1,5 +1,6 @@
 
 -> This is an XML file that contains the entire blueprint of your application.
+-> If you have an application class, then this also needs to be registered in the manifest file.
 -> All the activities, services, intent filters, broadcast receivers, permissions etc are registered over here.
 -> No activity, service will be able to load unless it is registered in Manifest file.
 -> The Android OS depends upon this blueprint in order to check which is the first activity that needs to start(action MAIN and category LAUNCHER)

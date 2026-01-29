@@ -34,3 +34,11 @@
 -> Application.registerActivityLifecycleCallbacks() is used to register the lifecycle callbacks of the activity.
 
 -> When activity B is called on top of activity A, then this is the lifecycle order => A's onPause() -> B's onCreate() -> B's onStart() -> B's onResume() -> A's onStop()
+
+-> In order to communicate between two activities unidirectional or bidirectional, we can do it by following:-
+    -> Passing arguments in intent extras before launching activity B.
+    -> Using ContentProviders to provide information from activity A to activity B.
+    -> Using a singleton class to get and set values in a common place.
+    -> Using shared view model in application context scope.
+    -> Adding BroadcastReceivers to share information using a broadcast.
+    -> Using EventBus, flows etc.

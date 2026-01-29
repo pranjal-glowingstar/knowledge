@@ -25,6 +25,7 @@
 -> reified helps to retain the type of the generic inside the method body so that this type could be used for our purposes.
 -> by default, kotlin follows type erasure construct. This means that any generic type method will not be able to hold the type when it comes inside method body.
 -> That is why inline is necessary when using reified keyword because inline will bring the body at the point of execution and then reified could help itself in storing the type.
+-> reified essentially tells the compiler: "Since you're already copy-pasting this code via inline, replace every instance of T with the actual class reference."
 
 -> const keyword is better for defining constants because by default all const variables are made inline.
 -> Primary Constructor => init block => Secondary Constructor. This is the order in which blocks are processed.
