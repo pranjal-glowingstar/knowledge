@@ -58,3 +58,5 @@ EG:- suspend fun <T> fetchFirst(
   }
 
 -> In order to make multiple coroutines wait all at once, we can use awaitAll(job1,async1...) method
+-> Dispatchers.IO.limitedParallelism(N), ensures that even if 1000 coroutines are launched, only N threads from the IO pool will ever be occupied by that specific task.
+-> This leaves the remaining threads available for network requests and other IO tasks. If we have 64 IO threads and N is 15, only 15 threads will be used for these coroutines. Remaining 49 will be available for other operations.

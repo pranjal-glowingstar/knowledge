@@ -1,0 +1,9 @@
+
+-> When you use layout_weight, the LinearLayout is forced to perform two measure passes on every child to calculate the remaining space.
+-> If you nest these, the number of passes increases exponentially (2^n). This is the "Layout Taxation" that kills performance.
+
+-> ConstraintLayout uses an optimization algorithm called Cassowary.
+-> It solves a system of linear equations to determine positions.
+-> If the UI is extremely simple (e.g., a single Icon and a Text), the math required for Cassowary is "heavier" than the simple "top-to-bottom" logic of a LinearLayout.
+
+-> This is the reason why for layouts with complex and multiple/ multi level hierarchy are heavier in liner layout whereas for simple UIs, constraint layout can be relatively heavy.

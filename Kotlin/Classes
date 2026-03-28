@@ -41,3 +41,4 @@
 -> Nested class are the classes which are declared inside another class. A nested class does NOT have the access to its parent class variables and methods.
 -> Inner class are the classes which are declared inside another class. An inner class have the access to its parent class variables and methods.
 -> final keyword is used to make a class non-inheritable. All classes in Kotlin are final by nature.
+-> Enums are for constant data while sealed classes are for constant types.

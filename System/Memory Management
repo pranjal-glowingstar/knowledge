@@ -1,5 +1,7 @@
 
 -> Memory Management is an important aspect of Android OS to maintain RAM usage and provide the memory to apps which are heavy usage in nature.
+-> Android doesn't kill processes randomly. It assigns every process an oom_score_adj (Out Of Memory Score Adjustment) ranging from -1000 (System) to 1000 (Background/Empty).
+-> The higher the score, the more likely the process is to be "axed."
 -> It is responsible for maintaining the apps to be in recents or not, whether to kill any process or view or not etc.
 -> OS gives the callback of onTrimMemory() when there is some memory constraints. One can manually release memory by destroying some components.
 -> Garbage Collector is the one that is running between the processes and trying to collect any object that is not in use as soon as possible.
