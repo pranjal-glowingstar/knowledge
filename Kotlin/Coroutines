@@ -22,6 +22,10 @@
 -> Coroutines provide a set of dispatchers as well. They define the underlying thread in which the coroutine is gonna run in.
 -> Dispatchers.Main for main thread UI operations, Dispatchers.IO for input output/ API calls, Dispatchers.Default for high performing calculations, Dispatchers.Unconfirmed for tasks which do not come in any of these category.
 -> Context and Scopes are different terms wrt coroutines. Context defines the type of dispatchers + any supervisor for exception handling etc whereas scope defines how long this coroutine is gonna live for.
+-> In general, for every app process(yes each app process have a separate thread pool with the below numbers), we have the following:-
+    -> 1 Main/UI thread
+    -> X Default threads(X = # of cores)
+    -> 64 IO threads
 
 -> launch{} creates a new coroutine in a given scope. It returns a Job. The moment launch{} is called, it creates a coroutine and jumps to the next statement. It does NOT wait for this block to be executed fully.
 -> async{} creates a new coroutine in a given scope. It returns a Deferred<T> which means that unlike launch{}, async{} gives the result of the execution of the coroutine. The moment async{} is called, it creates a coroutine and jumps to the next statement. It does NOT wait for this block to be executed fully. To get the value of the execution, use await()
