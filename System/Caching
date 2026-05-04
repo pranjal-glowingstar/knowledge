@@ -1,0 +1,26 @@
+
+-> Caching is the process in which we save very frequently used data in order for faster retrieval.
+-> Caching is divided into 3 layers
+    -> App's in memory cache(instances of classes, mutable maps, sets, bitmap cache etc, objects in RAM)
+    -> OS/Page cache(L1/L2/L3 cache of OS where it is storing pages)
+    -> Disk cache(app storage cache directory)
+
+-> App's in memory cache gets erased the moment the app is killed since it is stored in RAM and if the app is not present, all the objects are destroyed immediately.
+-> OS/Page level cache may have your data stored in it even if the app is closed but may get evicted as the new cache data is overridden by OS.
+-> Disk cache is the persistent cache that is stored in hard drive. Although it is present in hard drive, it still provides a good level of fast retrieval.
+
+-> When we load a file from our app, it is stored in the appDir folder.
+-> This folder is stored in hard drive and is private and accessible only to the app that it is associated with.
+-> Each app will have its own fileDir folder and only that app will have the access to read and write data.
+
+-> Since fileDir is stored in hard drive, it is slow compared to in memory or OS level cache.
+-> Even though it is slow, it is still useful because the data stored here is already verified, authorized and optimized to be opened directly.
+
+-> When we load a file, the access(rwx), protection and other bottlenecks that are required to open a file are computed usually once.
+-> When these computations are done, the app creates a new local duplicate file in the fileDir folder so that subsequent opens are faster.
+-> So when files are opened from fileDir, it opens a copied version of the original file where the bottlenecks are already computed.
+
+-> Sometimes, the app also stores decompressed data, parsed metadata etc in the filesDir for faster file open and parsing.
+-> It also makes sure that if the files are local and coming from content provider or from URI, then the operations of IPC calls, permission checks etc are also streamlined and not computed again.
+
+-> Ultimately, reading from fileDir is still a disk read, but since it has already computed most of the work and has stored metadata with it, the folder becomes relatively faster in retrieving data.
